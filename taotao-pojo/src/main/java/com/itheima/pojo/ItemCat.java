@@ -53,7 +53,7 @@ public class ItemCat implements java.io.Serializable {
 
     /** 该类目是否为父类目，1为true，0为false */
     @Column(name = "IS_PARENT", nullable = true)
-    private Byte[] isParent;
+    private boolean isParent = true;
 
     /** 创建时间 */
     @Column(name = "CREATED", nullable = true)
@@ -158,23 +158,13 @@ public class ItemCat implements java.io.Serializable {
         this.sortOrder = sortOrder;
     }
 
-    /**
-     * 获取该类目是否为父类目，1为true，0为false
-     * 
-     * @return 该类目是否为父类目
-     */
-    public Byte[] getIsParent() {
-        return this.isParent;
+
+    public boolean isParent() {
+        return isParent;
     }
 
-    /**
-     * 设置该类目是否为父类目，1为true，0为false
-     * 
-     * @param isParent
-     *          该类目是否为父类目
-     */
-    public void setIsParent(Byte[] isParent) {
-        this.isParent = isParent;
+    public void setParent(boolean parent) {
+        isParent = parent;
     }
 
     /**
@@ -213,5 +203,15 @@ public class ItemCat implements java.io.Serializable {
      */
     public void setUpdated(Date updated) {
         this.updated = updated;
+    }
+
+
+
+    public String getText(){
+        return name;
+    }
+
+    public String getState(){
+        return isParent?"closed":"open";
     }
 }

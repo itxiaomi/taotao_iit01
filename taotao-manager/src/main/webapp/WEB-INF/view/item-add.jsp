@@ -74,6 +74,8 @@
 	};
 	
 	var itemAddEditor ;
+
+	//这段代码是入口函数 ， 页面加载完毕就执行。
 	$(function(){
 		//创建富文本编辑器
 		itemAddEditor = KindEditor.create("#itemAddForm [name=desc]", kingEditorParams);
@@ -114,23 +116,30 @@
 	
 	//类目选择初始化
 	function initItemCat(){
+
+	    //找到标签 : 选择类目
 		var selectItemCat = $(".selectItemCat");
+
+		//绑定点击事件
    		selectItemCat.click(function(){
+
+   		    //创建一个div , 里面又创建ul标签 。  <div><ul></ul></div>
    			$("<div>").css({padding:"5px"}).html("<ul>")
-   			.window({
+   			.window({ //生成一个窗口
    				width:'500',
    			    height:"450",
-   			    modal:true,
+   			    modal:true, //背景阴影
    			    closed:true,
    			    iconCls:'icon-save',
    			    title:'选择类目',
+				//窗口打开之后，执行的函数
    			    onOpen : function(){
    			    	var _win = this;
-   			    	$("ul",_win).tree({
+   			    	$("ul",_win).tree({  //在刚才的ul里面生成一个树结构
    			    		url:'/rest/item/cat',
    			    		method:'GET',
    			    		animate:true,
-   			    		onClick : function(node){
+   			    		onClick : function(node){  //对每一条树支的点击判定
    			    			if($(this).tree("isLeaf",node.target)){
    			    				// 填写到cid中
    			    				selectItemCat.parent().find("[name=cid]").val(node.id);
@@ -140,10 +149,12 @@
    			    		}
    			    	});
    			    },
+
+				//关闭窗口执行的函数
    			    onClose : function(){
    			    	$(this).window("destroy");
    			    }
-   			}).window('open');
+   			}).window('open'); //打开窗口
    		});
     }
 	
