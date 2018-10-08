@@ -1,5 +1,6 @@
 package com.itheima.service;
 
+import com.github.pagehelper.PageInfo;
 import com.itheima.pojo.Item;
 
 /*
@@ -19,4 +20,10 @@ public interface ItemService {
      * @return
      */
     int add(Item item ,String desc);
+
+    //既然是分页查询，返回list集合是不够的，因为list集合仅仅只能体现这一页的数据集合
+    //还有些东西没法体现：
+    //List<Item> list(int page , int rows);
+
+    PageInfo<Item> list(int page , int rows);
 }

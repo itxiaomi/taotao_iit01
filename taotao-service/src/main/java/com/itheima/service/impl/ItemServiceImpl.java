@@ -1,6 +1,8 @@
 package com.itheima.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.itheima.mapper.ItemDescMapper;
 import com.itheima.mapper.ItemMapper;
 import com.itheima.pojo.Item;
@@ -9,6 +11,7 @@ import com.itheima.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 /*
  *  @项目名：  taotao-parent 
@@ -70,5 +73,16 @@ public class ItemServiceImpl implements ItemService {
         itemDescMapper.insert(itemDesc);
 
         return result;
+    }
+
+    @Override
+    public PageInfo<Item> list(int page, int rows) {
+
+        //设置分页
+        PageHelper.startPage(page , rows);
+
+        List<Item> list = itemMapper.selectAll();
+
+        return new PageInfo<>(list);
     }
 }
