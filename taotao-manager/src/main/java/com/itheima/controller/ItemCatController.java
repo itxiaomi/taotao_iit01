@@ -14,6 +14,7 @@ import com.itheima.pojo.ItemCat;
 import com.itheima.service.ItemCatService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -26,12 +27,12 @@ public class ItemCatController {
 
     @RequestMapping("/rest/item/cat")
     @ResponseBody
-    public List<ItemCat> getCategoryByParentId(){
+    public List<ItemCat> getCategoryByParentId(@RequestParam(defaultValue = "0") int id ){
 
         //默认先获取所有的一级分类
-        int parentId = 0 ;
+       // int parentId = 0 ;
 
-        List<ItemCat> list = itemCatService.getCategoryByParentId(parentId);
+        List<ItemCat> list = itemCatService.getCategoryByParentId(id);
 
 
         return list;

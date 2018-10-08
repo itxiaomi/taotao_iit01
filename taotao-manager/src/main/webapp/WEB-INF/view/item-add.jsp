@@ -77,7 +77,7 @@
 
 	//这段代码是入口函数 ， 页面加载完毕就执行。
 	$(function(){
-		//创建富文本编辑器
+		//创建富文本编辑器 #itemAddForm [name=desc]  找到id值为 itemAddForm的标签。  在这个form标签找一个name属性叫做desc的标签
 		itemAddEditor = KindEditor.create("#itemAddForm [name=desc]", kingEditorParams);
 		//初始化类目选择
 		initItemCat();

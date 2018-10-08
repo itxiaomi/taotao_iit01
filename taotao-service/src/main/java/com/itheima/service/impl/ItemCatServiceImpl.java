@@ -31,8 +31,10 @@ public class ItemCatServiceImpl  implements ItemCatService{
         //按照普通列来查询。
         ItemCat itemCat = new ItemCat();
 
+        Long id = Long.parseLong(parentId+"");
+
         //long val = Long.parseLong(parentId+"");
-        itemCat.setParentId(0L);
+        itemCat.setParentId(id);
 
         //selectByExample 里面使用的是criteria 查询条件对象。
         List<ItemCat> list = itemCatMapper.select(itemCat);

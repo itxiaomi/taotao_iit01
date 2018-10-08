@@ -53,7 +53,7 @@ public class ItemCat implements java.io.Serializable {
 
     /** 该类目是否为父类目，1为true，0为false */
     @Column(name = "IS_PARENT", nullable = true)
-    private boolean isParent = true;
+    private Boolean isParent;
 
     /** 创建时间 */
     @Column(name = "CREATED", nullable = true)
