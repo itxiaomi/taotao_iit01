@@ -16,12 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 
+    @RequestMapping("/")
+    public String index(){
+        System.out.println("要跳转首页了~");
+        return "index";
+    }
 
-    @RequestMapping("index")
+
+   /* @RequestMapping("index")
     public String index(){
 
         System.out.println("要跳转首页了~");
-
 
         //在SpringBoot里面，默认的资源路径是在resource/static| public ...
         //由于我们的网页是在web-inf/view 这个路径，所以要告诉SprigMVC 资源路径的位置在哪里。
@@ -30,7 +35,7 @@ public class PageController {
        // spring.mvc.view.suffix=.jsp
         ///WEB-INF/view/index.jsp
         return "index";
-    }
+    }*/
 
     //@RequestMapping("/rest/page/item-add")
 

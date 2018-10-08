@@ -29,6 +29,14 @@ dependencies {
     compile group: 'io.dubbo.springboot',name: 'spring-boot-starter-dubbo',version:'1.0.0'
 
 
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+
+
+
     //taotao-manager这个项目依赖了taotao-service这个项目
     compile project(':taotao-interface')
+
+    //添加taotao-common的依赖，因为要上传图片
+    compile project(':taotao-common')
 }

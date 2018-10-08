@@ -12,6 +12,8 @@
       <entry name="!?*.clj" />
     </wildcardResourcePatterns>
     <bytecodeTargetLevel>
+      <module name="taotao-common_main" target="1.8" />
+      <module name="taotao-common_test" target="1.8" />
       <module name="taotao-interface_main" target="1.8" />
       <module name="taotao-interface_test" target="1.8" />
       <module name="taotao-manager_main" target="1.8" />

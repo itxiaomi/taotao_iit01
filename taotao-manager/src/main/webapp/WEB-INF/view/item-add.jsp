@@ -160,10 +160,16 @@
 	
 	//图片上传初始化
 	function initPicUpload(){
+		//找到上传图片的按钮， 设置点击事件。
        	$(".picFileUpload").click(function(){
+
+       	    //找form表单
        		var form = $('#itemAddForm');
+
+
        		KindEditor.editor(kingEditorParams).loadPlugin('multiimage',function(){
        			var editor = this;
+       			//打开对话框
        			editor.plugin.multiImageDialog({
 					clickFn : function(urlList) {
 						$(".pics li").remove();

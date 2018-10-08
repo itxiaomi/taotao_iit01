@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/taotao-common.iml" filepath="$PROJECT_DIR$/.idea/modules/taotao-common.iml" group="taotao-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/taotao-common/taotao-common_main.iml" filepath="$PROJECT_DIR$/.idea/modules/taotao-common/taotao-common_main.iml" group="taotao-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/taotao-common/taotao-common_test.iml" filepath="$PROJECT_DIR$/.idea/modules/taotao-common/taotao-common_test.iml" group="taotao-common" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/taotao-interface.iml" filepath="$PROJECT_DIR$/.idea/modules/taotao-interface.iml" group="taotao-interface" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/taotao-interface/taotao-interface_main.iml" filepath="$PROJECT_DIR$/.idea/modules/taotao-interface/taotao-interface_main.iml" group="taotao-interface" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/taotao-interface/taotao-interface_test.iml" filepath="$PROJECT_DIR$/.idea/modules/taotao-interface/taotao-interface_test.iml" group="taotao-interface" />
