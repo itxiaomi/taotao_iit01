@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/taotao-manager" />
             <option value="$PROJECT_DIR$/taotao-mapper" />
             <option value="$PROJECT_DIR$/taotao-pojo" />
+            <option value="$PROJECT_DIR$/taotao-portal" />
             <option value="$PROJECT_DIR$/taotao-service" />
           </set>
         </option>
