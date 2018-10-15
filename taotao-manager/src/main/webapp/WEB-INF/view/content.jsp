@@ -5,6 +5,8 @@
             <ul id="contentCategoryTree" class="easyui-tree" data-options="url:'/rest/content/category',animate: true,method : 'GET'">
             </ul>
         </div>
+
+
         <div data-options="region:'center'" style="padding:5px">
             <table class="easyui-datagrid" id="contentList" data-options="toolbar:contentListToolbar,singleSelect:false,collapsible:true,pagination:true,method:'get',pageSize:20,url:'/rest/content',queryParams:{categoryId:0}">
 		    <thead>
@@ -41,12 +43,16 @@ $(function(){
 var contentListToolbar = [{
     text:'新增',
     iconCls:'icon-add',
-    handler:function(){
+    handler:function(){ //点击新增触发的操作
+
+		//获取到我们在左边选中的树节点
     	var node = $("#contentCategoryTree").tree("getSelected");
     	if(!node || !$("#contentCategoryTree").tree("isLeaf",node.target)){
     		$.messager.alert('提示','新增内容必须选择一个内容分类!');
     		return ;
     	}
+
+    	//创建窗口
     	createWindow({
 			url : "/rest/page/content-add"
 		}); 
@@ -112,7 +118,7 @@ var contentListToolbar = [{
 			height : params.height?params.height:"80%",
 			modal:true,
 			title : params.title?params.title:" ",
-			href : params.url,
+			href : params.url, //代表窗口的内容来自于哪里"/rest/page/content-add"
 			onClose : function(){
 				$(this).window("destroy");
 			},

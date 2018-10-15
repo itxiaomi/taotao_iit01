@@ -21,8 +21,6 @@ public class PageController {
 
         //这里要查询数据库， 然后在首页显示动态内容。
         System.out.println("要跳转首页了~！");
-
-
         return "index";
     }
 }

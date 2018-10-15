@@ -12,11 +12,8 @@
 
 package com.itheima.pojo;
 
+import javax.persistence.*;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * 内容分类(TB_CONTENT_CATEGORY)
@@ -32,6 +29,7 @@ public class ContentCategory implements java.io.Serializable {
 
     /** 类目ID */
     @Id
+    @GeneratedValue(generator = "JDBC")
     @Column(name = "ID", unique = true, nullable = false, length = 19)
     private Long id;
 
@@ -53,7 +51,7 @@ public class ContentCategory implements java.io.Serializable {
 
     /** 该类目是否为父类目，1为true，0为false */
     @Column(name = "IS_PARENT", nullable = true)
-    private Byte[] isParent;
+    private Boolean isParent;
 
     /** 创建时间 */
     @Column(name = "CREATED", nullable = true)
@@ -163,7 +161,7 @@ public class ContentCategory implements java.io.Serializable {
      * 
      * @return 该类目是否为父类目
      */
-    public Byte[] getIsParent() {
+    public Boolean getIsParent() {
         return this.isParent;
     }
 
@@ -173,7 +171,7 @@ public class ContentCategory implements java.io.Serializable {
      * @param isParent
      *          该类目是否为父类目
      */
-    public void setIsParent(Byte[] isParent) {
+    public void setIsParent(Boolean isParent) {
         this.isParent = isParent;
     }
 
@@ -213,5 +211,36 @@ public class ContentCategory implements java.io.Serializable {
      */
     public void setUpdated(Date updated) {
         this.updated = updated;
+    }
+
+
+    /***
+     * 获得树节点的文本信息-->类目的名称
+     * @return
+     */
+    public String getText(){
+        return name;
+    }
+    /**
+     * 判断是否是子节点
+     * @return
+     */
+    public String getState(){
+        return isParent? "closed":"open";
+    }
+
+
+    @Override
+    public String toString() {
+        return "ContentCategory{" +
+                "id=" + id +
+                ", parentId=" + parentId +
+                ", name='" + name + '\'' +
+                ", status=" + status +
+                ", sortOrder=" + sortOrder +
+                ", isParent=" + isParent +
+                ", created=" + created +
+                ", updated=" + updated +
+                '}';
     }
 }
