@@ -103,6 +103,7 @@ var contentListToolbar = [{
             	$.post("/rest/content/delete",params, function(data){
         			if(data.status == 200){
         				$.messager.alert('提示','删除内容成功!',undefined,function(){
+        				    //重新加载表格的数据
         					$("#contentList").datagrid("reload");
         				});
         			}

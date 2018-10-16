@@ -16,4 +16,8 @@ public interface ContentService {
     int add(Content content);
 
     PageInfo<Content> list(long categoryId , int page , int rows);
+
+    int edit(Content content);
+
+    int delete(String ids);
 }

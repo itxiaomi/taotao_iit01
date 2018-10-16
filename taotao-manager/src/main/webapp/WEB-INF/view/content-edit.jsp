@@ -67,11 +67,22 @@ var contentEditPage = {
 			contentEditEditor.sync();
 			
 			$.post("/rest/content/edit",$("#contentEditForm").serialize(), function(data){
+
+
+                $("#contentList").datagrid("reload");
+                TT.closeCurrentWindow();
+
+				    //这个地方虽然写着200，但是不是判定响应结果状态码200.
+				//data 其实就是服务器方法返回的json字符串。 {"status":200 , "name":"aaa" , "age":18}
 				if(data.status == 200){
-					$.messager.alert('提示','新增内容成功!');
-					$("#contentList").datagrid("reload");
-					TT.closeCurrentWindow();
+					$.messager.alert('提示','更新内容成功!');
+
+				}else{
+                    $.messager.alert('提示','更新内容失败!');
+
 				}
+
+
 			});
 		},
 		clearForm : function(){

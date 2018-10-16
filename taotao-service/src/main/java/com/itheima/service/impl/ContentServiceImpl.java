@@ -52,4 +52,28 @@ public class ContentServiceImpl implements ContentService {
 
         return new PageInfo<>(list);
     }
+
+    @Override
+    public int edit(Content content) {
+
+        content.setUpdated(new Date());
+
+        int result = contentMapper.updateByPrimaryKeySelective(content);
+
+        return result;
+    }
+
+    @Override
+    public int delete(String ids) {////ids: 97,98  | ids:97
+
+       /* Content c = new Content();
+        c.setId(id);
+    */
+        int result = 0 ;
+        for (String id : ids.split(",")) {
+            result += contentMapper.deleteByPrimaryKey(Long.parseLong(id));
+        }
+
+        return result ;
+    }
 }
