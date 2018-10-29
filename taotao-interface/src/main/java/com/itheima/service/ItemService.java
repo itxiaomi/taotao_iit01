@@ -26,4 +26,10 @@ public interface ItemService {
     //List<Item> list(int page , int rows);
 
     PageInfo<Item> list(int page , int rows);
+
+    Item findItemById(long id);
+
+    int deleteItem(long id);
+
+    int updateItem(Item item);
 }

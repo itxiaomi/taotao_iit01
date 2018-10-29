@@ -85,4 +85,22 @@ public class ItemServiceImpl implements ItemService {
 
         return new PageInfo<>(list);
     }
+
+    @Override
+    public Item findItemById(long id) {
+
+        return itemMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int deleteItem(long id) {
+
+        return itemMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateItem(Item item) {
+
+        return itemMapper.updateByPrimaryKeySelective(item);
+    }
 }

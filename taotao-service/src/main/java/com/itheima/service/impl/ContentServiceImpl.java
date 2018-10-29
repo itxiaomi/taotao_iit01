@@ -39,6 +39,14 @@ public class ContentServiceImpl implements ContentService {
 
         int result  = contentMapper.insert(content);
 
+        //只要有写入的操作，就立即清除缓存，以便下次能得到最新的数据
+        //bigAd:ljdflkajlsjdlfjasjdfljalsdf
+
+        //如果使用这种方式，key还是存在的，只是值是空字符串
+        //redisTemplate.opsForValue().set("bigAd","");
+
+        redisTemplate.opsForValue().getOperations().delete("bigAd");
+
 
         return result;
     }
@@ -66,6 +74,9 @@ public class ContentServiceImpl implements ContentService {
 
         int result = contentMapper.updateByPrimaryKeySelective(content);
 
+
+        redisTemplate.opsForValue().getOperations().delete("bigAd");
+
         return result;
     }
 
@@ -79,6 +90,8 @@ public class ContentServiceImpl implements ContentService {
         for (String id : ids.split(",")) {
             result += contentMapper.deleteByPrimaryKey(Long.parseLong(id));
         }
+
+        redisTemplate.opsForValue().getOperations().delete("bigAd");
 
         return result ;
     }
@@ -135,6 +148,13 @@ public class ContentServiceImpl implements ContentService {
         ops.set("bigAd" , json);
 
         System.out.println("mysql查询完毕，并且也存到了redis去");
+
+        /*HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
+        hash.put("bigAd","1"  ,"第一条数据");
+        hash.put("bigAd","2"  ,"第一条数据");
+        hash.put("bigAd","3"  ,"第一条数据");
+
+        hash.delete("bigAd","1")*/
 
         return   json;
 
