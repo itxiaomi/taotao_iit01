@@ -280,4 +280,21 @@ public class Content implements java.io.Serializable {
     public void setUpdated(Date updated) {
         this.updated = updated;
     }
+
+    @Override
+    public String toString() {
+        return "Content{" +
+                "id=" + id +
+                ", categoryId=" + categoryId +
+                ", title='" + title + '\'' +
+                ", subTitle='" + subTitle + '\'' +
+                ", titleDesc='" + titleDesc + '\'' +
+                ", url='" + url + '\'' +
+                ", pic='" + pic + '\'' +
+                ", pic2='" + pic2 + '\'' +
+                ", content='" + content + '\'' +
+                ", created=" + created +
+                ", updated=" + updated +
+                '}';
+    }
 }
