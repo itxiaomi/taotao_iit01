@@ -7,6 +7,9 @@ import com.itheima.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.util.DigestUtils;
+
+import java.util.Date;
 
 /*
  *  @项目名：  taotao-parent 
@@ -70,5 +73,45 @@ public class UserServiceImpl implements UserService {
 
         return ops.get(key);
 
+    }
+
+
+    //MD5 | sha-1（破解了）
+    @Override
+    public int register(User user) {
+
+        user.setCreated(new Date());
+
+        user.setUpdated(new Date());
+
+
+        String newPassword= DigestUtils.md5DigestAsHex( user.getPassword().getBytes());
+
+        user.setPassword(newPassword);
+
+
+        return userMapper.insert(user);
+    }
+
+    @Override
+    public User login(User user) {
+
+        String newPassword= DigestUtils.md5DigestAsHex( user.getPassword().getBytes());
+
+        user.setPassword(newPassword);
+
+        System.out.println("user2=" + user);
+
+        return userMapper.selectOne(user);
+
+    }
+
+    public static void main(String [] args){
+
+       String p = "123";
+
+        p = DigestUtils.md5DigestAsHex(p.getBytes());
+
+        System.out.println("p=" + p);
     }
 }

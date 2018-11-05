@@ -1,5 +1,7 @@
 package com.itheima.service;
 
+import com.itheima.pojo.User;
+
 /*
  *  @项目名：  taotao-parent 
  *  @包名：    com.itheima.service
@@ -26,5 +28,21 @@ public interface UserService {
      * @return
      */
     String selectUserByTicket(String ticket);
+
+
+    /**
+     * 执行注册功能
+     * @param user
+     * @return
+     */
+    int register(User user);
+
+
+    /**
+     * 登录
+     * @param user
+     * @return  用户的详细信息
+     */
+    User login(User user);
 }
 

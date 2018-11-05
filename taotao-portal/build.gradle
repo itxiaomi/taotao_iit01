@@ -43,8 +43,8 @@ dependencies {
 
 
 
+    compile project(':taotao-sso-interface')
+
     compile project(':taotao-interface')
-
-
 
 }

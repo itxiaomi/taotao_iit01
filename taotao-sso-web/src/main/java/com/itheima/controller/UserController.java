@@ -24,13 +24,17 @@ public class UserController {
 
     @RequestMapping("/user/check/{param}/{type}")
     @ResponseBody
-    public String check(@PathVariable  String param ,@PathVariable int type){
+    public String check(@PathVariable  String param ,@PathVariable int type , String callback){
 
         Boolean flag = userService.check(param, type);
 
         System.out.println(flag ? "可以使用" : "不能使用");
 
-        return "success";
+        //return "success";
+        //callback就是方法名字jsonp1541397569760  --》 jsonp1541397569760(true)
+        String result = callback+"("+flag+")";
+
+        return result;
     }
 
 
