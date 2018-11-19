@@ -1,6 +1,7 @@
 package com.itheima.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.google.gson.Gson;
 import com.itheima.mapper.UserMapper;
 import com.itheima.pojo.User;
 import com.itheima.service.UserService;
@@ -10,6 +11,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
+import java.util.UUID;
 
 /*
  *  @项目名：  taotao-parent 
@@ -94,16 +96,40 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(User user) {
+    public String login(User user) {
 
+        //对密码进行MD5加密
         String newPassword= DigestUtils.md5DigestAsHex( user.getPassword().getBytes());
-
         user.setPassword(newPassword);
 
-        System.out.println("user2=" + user);
+        //根据账号和密码查询用户
+        user = userMapper.selectOne(user);
 
-        return userMapper.selectOne(user);
+        String key = null;
 
+        //判定登录是否成功，如果成功，那么需要保存到redis
+        if(user !=null ){
+            String json = new Gson().toJson(user);
+
+            key= "iit_"+ UUID.randomUUID().toString();
+            //把用户数据保存到redis里面去。
+            redisTemplate.opsForValue().set(key,json);
+
+            //redisTemplate.opsForValue().set();
+        }
+
+
+
+        return key;
+
+    }
+
+    @Override
+    public User findUser(String ticket) {
+
+        String json = redisTemplate.opsForValue().get(ticket);
+
+        return new Gson().fromJson(json , User.class);
     }
 
     public static void main(String [] args){

@@ -139,7 +139,7 @@
                     <input type="button" class="btn-img btn-entry" id="loginsubmit" value="登录" tabindex="8" clstag="passport|keycount|login|06"/>
                 </div>
             </div>
-                <div class="coagent hide" clstag="passport|keycount|login|07">
+                <div class="coagent" clstag="passport|keycount|login|07">
                     <label class="ftx24">
                         使用合作网站账号登录淘淘：
                         <span class="clr"></span><input type="hidden" name="KbmPxRtWsz" value="IMdug" />

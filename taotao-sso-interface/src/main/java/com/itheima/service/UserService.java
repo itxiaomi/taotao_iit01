@@ -43,6 +43,9 @@ public interface UserService {
      * @param user
      * @return  用户的详细信息
      */
-    User login(User user);
+    String login(User user);
+
+
+    User findUser(String ticket);
 }
 

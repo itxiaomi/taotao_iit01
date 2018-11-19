@@ -1,11 +1,16 @@
 package com.itheima.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.itheima.pojo.User;
 import com.itheima.service.ContentService;
+import com.itheima.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 /*
  *  @项目名：  taotao-parent 
@@ -22,6 +27,10 @@ public class PageController {
     private ContentService contentService;
 
 
+    @Reference
+    private UserService userService;
+
+
 
     @RequestMapping("/page/{pageName}")
     public String page(@PathVariable String pageName){
@@ -35,10 +44,29 @@ public class PageController {
    // localhost:8080/index
    // @RequestMapping("/index")
     @RequestMapping("/")
-    public String index(Model model){
+    public String index(Model model , HttpServletRequest request){
 
         //这里要查询数据库， 然后在首页显示动态内容。
         System.out.println("要跳转首页了~！");
+
+        //获取ticket
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null){
+
+            for(Cookie cookie :cookies){
+                String name = cookie.getName();
+                if("ticket".equals(name)){
+                    //得到了ticket
+                    String value = cookie.getValue();
+                    User user = userService.findUser(value);
+
+                    model.addAttribute("user",user);
+
+                    break;
+                }
+            }
+
+        }
 
 
         //如果首页的内容要动态显示，那么就需要在这个方法里面写代码了。

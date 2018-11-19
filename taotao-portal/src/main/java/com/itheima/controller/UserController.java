@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,16 +48,31 @@ public class UserController {
 
     @RequestMapping("/user/doLogin")
     @ResponseBody
-    public String login(User user){
+    public Map<String , String> login(User user , HttpServletResponse response){
 
 
-        System.out.println("user=" + user);
-
-        User loginUser = userService.login(user);
-
-        System.out.println("loginUser=" + loginUser);
+        Map<String , String> map  = new HashMap<String ,String>();
 
 
-        return "success";
+        String ticket = userService.login(user);
+
+        if(ticket != null){
+            //登录成功啦
+            Cookie cookie = new Cookie("ticket",ticket);
+
+            cookie.setMaxAge(60*60*24*7);
+
+            cookie.setPath("/");
+
+            response.addCookie(cookie);
+
+            map.put("status" ,"200");
+            map.put("success","http://www.taotao.com");
+
+
+        }
+
+        return map;
+
     }
 }
