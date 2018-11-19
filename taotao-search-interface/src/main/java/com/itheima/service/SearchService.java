@@ -1,8 +1,7 @@
 package com.itheima.service;
 
 import com.itheima.pojo.Item;
-
-import java.util.List;
+import com.itheima.pojo.Page;
 
 /*
  *  @项目名：  taotao-parent 
@@ -14,5 +13,5 @@ import java.util.List;
  */
 public interface SearchService {
 
-   List<Item> search(String q);
+   Page<Item> search(String q , int page , int pageSize);
 }
