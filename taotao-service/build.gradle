@@ -29,6 +29,9 @@ dependencies {
 
 
 
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-activemq
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-activemq', version: '1.5.10.RELEASE'
+
     //添加redis依赖
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '1.5.10.RELEASE'
 

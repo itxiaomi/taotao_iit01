@@ -9,6 +9,7 @@ import com.itheima.pojo.Item;
 import com.itheima.pojo.ItemDesc;
 import com.itheima.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsMessagingTemplate;
 
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemDescMapper itemDescMapper;
+
+    @Autowired
+    private JmsMessagingTemplate template;
 
 
     /*
@@ -71,6 +75,11 @@ public class ItemServiceImpl implements ItemService {
         itemDesc.setUpdated(time);
 
         itemDescMapper.insert(itemDesc);
+
+
+        //添加完商品，需要发送出来消息，然后让搜索系统去更新索引库。
+        template.convertAndSend("item-save" , id);
+
 
         return result;
     }

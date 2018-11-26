@@ -1,6 +1,7 @@
 package com.itheima.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.itheima.mapper.ItemMapper;
 import com.itheima.pojo.Item;
 import com.itheima.pojo.Page;
 import com.itheima.service.SearchService;
@@ -9,7 +10,9 @@ import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,39 @@ public class SearchServiceImpl implements SearchService {
 
     @Autowired
     private SolrClient solrClient;
+
+
+    @Autowired
+    private ItemMapper itemMapper;
+
+
+    @JmsListener(destination = "item-save")
+    @Override
+    public void addItem(String message) {
+        try {
+            System.out.println("搜索系统收到的消息是:  " + message);
+
+            //1. 查询最新添加的那件商品
+            Item item = itemMapper.selectByPrimaryKey(Long.parseLong(message));
+
+            //2. 把商品添加到索引库中
+
+            SolrInputDocument doc = new SolrInputDocument();
+            doc.addField("id",message);
+            doc.addField("item_title",item.getTitle());
+            doc.addField("item_image",item.getImage());
+            doc.addField("item_cid",item.getCid());
+            doc.addField("item_price",item.getPrice());
+            doc.addField("item_status",item.getStatus());
+
+            solrClient.add(doc);
+            solrClient.commit();
+
+            System.out.println("索引库更新完毕==" + message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public Page<Item> search(String q, int page , int pageSize) {
@@ -124,4 +160,6 @@ public class SearchServiceImpl implements SearchService {
 
         return null;
     }
+
+
 }
